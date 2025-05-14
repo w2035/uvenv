@@ -4,6 +4,8 @@
 
 UVENV_program='uvenv'
 UVENV_ENV_DIR="${HOME}/.$UVENV_program"
+UVENV_CURRENT=""
+
 
 # 帮助函数
 _uv_usage() {
@@ -93,10 +95,13 @@ _uv_activate_env() {
         return 1
     fi
     source "$env_path/bin/activate"
+    UVENV_CURRENT="$env_path/bin/activate"
 }
 
 _uv_deactivate_env() {
     deactivate
+    UVENV_CURRENT=""
+    # 清除当前环境变量
 }
 
 uvenv() {
@@ -128,15 +133,12 @@ uvenv() {
     activate)
         _uv_activate_env "$@"
         ;;
-
     act)
         _uv_activate_env "$@"
         ;;
-
     deactivate)
         _uv_deactivate_env "$@"
         ;;
-
     deact)
         _uv_deactivate_env "$@"
         ;;
@@ -150,3 +152,8 @@ uvenv() {
         ;;
     esac
 }
+
+
+if [ ! -z "$UVENV_CURRENT" ]; then
+    source $UVENV_CURRENT
+fi
