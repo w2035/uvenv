@@ -4,7 +4,8 @@ A global virtual environment management script for Python uv virtual environment
 由于uv 没有提供类似conda env 这样的功能，因此自己手动实现了一个。
 
 使用方法: 
-source uvenv
+source uvenv.sh
+
 或将上面一行代码添加到~/.bashrc
 
 
